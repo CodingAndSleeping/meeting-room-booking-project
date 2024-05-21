@@ -29,6 +29,12 @@ dependencies:
   mysql2:
     specifier: ^3.9.7
     version: 3.9.7
+  nodemailer:
+    specifier: ^6.9.13
+    version: 6.9.13
+  redis:
+    specifier: ^4.6.14
+    version: 4.6.14
   reflect-metadata:
     specifier: ^0.1.13
     version: 0.1.14
@@ -37,7 +43,7 @@ dependencies:
     version: 7.8.1
   typeorm:
     specifier: ^0.3.20
-    version: 0.3.20(mysql2@3.9.7)(ts-node@10.9.2)
+    version: 0.3.20(mysql2@3.9.7)(redis@4.6.14)(ts-node@10.9.2)
 
 devDependencies:
   '@nestjs/cli':
@@ -58,6 +64,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.3.1
     version: 20.12.12
+  '@types/nodemailer':
+    specifier: ^6.4.15
+    version: 6.4.15
   '@types/supertest':
     specifier: ^2.0.12
     version: 2.0.16
@@ -1043,7 +1052,7 @@ packages:
       '@nestjs/core': 10.3.8(@nestjs/common@10.3.8)(@nestjs/platform-express@10.3.8)(reflect-metadata@0.1.14)(rxjs@7.8.1)
       reflect-metadata: 0.1.14
       rxjs: 7.8.1
-      typeorm: 0.3.20(mysql2@3.9.7)(ts-node@10.9.2)
+      typeorm: 0.3.20(mysql2@3.9.7)(redis@4.6.14)(ts-node@10.9.2)
       uuid: 9.0.1
     dev: false
 
@@ -1089,6 +1098,55 @@ packages:
     resolution: {integrity: sha1-HsF+LtvsJcgwbUJOz78Tx94aqjE=}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
     dev: true
+
+  /@redis/bloom@1.2.0(@redis/client@1.5.16):
+    resolution: {integrity: sha1-0/1tPArz75LyZ2e1ZBSjcMe2O3E=}
+    peerDependencies:
+      '@redis/client': ^1.0.0
+    dependencies:
+      '@redis/client': 1.5.16
+    dev: false
+
+  /@redis/client@1.5.16:
+    resolution: {integrity: sha1-HVkZB3oGpLk1sOS++eA27vGhA3E=}
+    engines: {node: '>=14'}
+    dependencies:
+      cluster-key-slot: 1.1.2
+      generic-pool: 3.9.0
+      yallist: 4.0.0
+    dev: false
+
+  /@redis/graph@1.1.1(@redis/client@1.5.16):
+    resolution: {integrity: sha1-jBDfLff30CdBhmdRdkAxqVehcOo=}
+    peerDependencies:
+      '@redis/client': ^1.0.0
+    dependencies:
+      '@redis/client': 1.5.16
+    dev: false
+
+  /@redis/json@1.0.6(@redis/client@1.5.16):
+    resolution: {integrity: sha1-t6dyW7uQd2XYTJnVXqw/z3cuGA4=}
+    peerDependencies:
+      '@redis/client': ^1.0.0
+    dependencies:
+      '@redis/client': 1.5.16
+    dev: false
+
+  /@redis/search@1.1.6(@redis/client@1.5.16):
+    resolution: {integrity: sha1-M7zdeR2e2Iq2kQJDo1XYWn/t91Y=}
+    peerDependencies:
+      '@redis/client': ^1.0.0
+    dependencies:
+      '@redis/client': 1.5.16
+    dev: false
+
+  /@redis/time-series@1.0.5(@redis/client@1.5.16):
+    resolution: {integrity: sha1-ptcO96DnHgg+oJuWffCg7XQrxq0=}
+    peerDependencies:
+      '@redis/client': ^1.0.0
+    dependencies:
+      '@redis/client': 1.5.16
+    dev: false
 
   /@sinclair/typebox@0.27.8:
     resolution: {integrity: sha1-Zmf6wWxDa1Q0o4ejTe2wExmPbm4=}
@@ -1254,6 +1312,12 @@ packages:
     dependencies:
       undici-types: 5.26.5
 
+  /@types/nodemailer@6.4.15:
+    resolution: {integrity: sha1-SUvmleEcQ49/Xfc4+0q3QDEqbtI=, tarball: https://artifactory.sf-express.com:443/artifactory/api/npm/npm/@types/nodemailer/-/nodemailer-6.4.15.tgz}
+    dependencies:
+      '@types/node': 20.12.12
+    dev: true
+
   /@types/qs@6.9.15:
     resolution: {integrity: sha1-rd6KBg7JwwWoLeG6vBBW5zvWTc4=}
     dev: true
@@ -1300,7 +1364,7 @@ packages:
     dev: true
 
   /@types/validator@13.11.10:
-    resolution: {integrity: sha1-/rNkAYzdHz2XCp6MfxwxTAomT/8=, tarball: https://artifactory.sf-express.com:443/artifactory/api/npm/npm/@types/validator/-/validator-13.11.10.tgz}
+    resolution: {integrity: sha1-/rNkAYzdHz2XCp6MfxwxTAomT/8=}
 
   /@types/yargs-parser@21.0.3:
     resolution: {integrity: sha1-gV4wt4bS6PDc2F/VvPXhoE0AjxU=}
@@ -1995,10 +2059,10 @@ packages:
     dev: true
 
   /class-transformer@0.5.1:
-    resolution: {integrity: sha1-JBR9Xf/Sps6pMKMlCmd63flqszY=, tarball: https://artifactory.sf-express.com:443/artifactory/api/npm/npm/class-transformer/-/class-transformer-0.5.1.tgz}
+    resolution: {integrity: sha1-JBR9Xf/Sps6pMKMlCmd63flqszY=}
 
   /class-validator@0.14.1:
-    resolution: {integrity: sha1-/yQR7YE06ddqz+sUhyiERIvpgRA=, tarball: https://artifactory.sf-express.com:443/artifactory/api/npm/npm/class-validator/-/class-validator-0.14.1.tgz}
+    resolution: {integrity: sha1-/yQR7YE06ddqz+sUhyiERIvpgRA=}
     dependencies:
       '@types/validator': 13.11.10
       libphonenumber-js: 1.11.1
@@ -2068,6 +2132,11 @@ packages:
     resolution: {integrity: sha1-2jCcwmPfFZlMaIypAheco8fNfH4=}
     engines: {node: '>=0.8'}
     dev: true
+
+  /cluster-key-slot@1.1.2:
+    resolution: {integrity: sha1-iN2qRpBuMDtd4w0xU7fZ/goMGaw=}
+    engines: {node: '>=0.10.0'}
+    dev: false
 
   /co@4.6.0:
     resolution: {integrity: sha1-bqa989hTrlTMuOR7+gvz+QMfsYQ=}
@@ -2851,6 +2920,11 @@ packages:
     resolution: {integrity: sha1-8GlhdpDBDIaOc7hGV0Z2T5fDR58=}
     dependencies:
       is-property: 1.0.2
+    dev: false
+
+  /generic-pool@3.9.0:
+    resolution: {integrity: sha1-NvSmeOlj9P24cH6rBQgjq8To9eQ=}
+    engines: {node: '>= 4'}
     dev: false
 
   /gensync@1.0.0-beta.2:
@@ -3795,7 +3869,7 @@ packages:
     dev: true
 
   /libphonenumber-js@1.11.1:
-    resolution: {integrity: sha1-JZZoPhh2v+50CCu0kzn+CoWuNPk=, tarball: https://artifactory.sf-express.com:443/artifactory/api/npm/npm/libphonenumber-js/-/libphonenumber-js-1.11.1.tgz}
+    resolution: {integrity: sha1-JZZoPhh2v+50CCu0kzn+CoWuNPk=}
 
   /lines-and-columns@1.2.4:
     resolution: {integrity: sha1-7KKE910pZQeTCdwK2SVauy68FjI=}
@@ -4097,6 +4171,11 @@ packages:
   /node-releases@2.0.14:
     resolution: {integrity: sha1-L/sFO864sr6Elezhq2zmAMRGGws=}
     dev: true
+
+  /nodemailer@6.9.13:
+    resolution: {integrity: sha1-Wykr8ekmRfSFLKhyxWprpsSj09Y=}
+    engines: {node: '>=6.0.0'}
+    dev: false
 
   /normalize-path@3.0.0:
     resolution: {integrity: sha1-Dc1p/yOhybEf0JeDFmRKA4ghamU=}
@@ -4430,6 +4509,17 @@ packages:
     dependencies:
       resolve: 1.22.8
     dev: true
+
+  /redis@4.6.14:
+    resolution: {integrity: sha1-WZ5JtlgWxWpmg/axncN0yOeG0JE=}
+    dependencies:
+      '@redis/bloom': 1.2.0(@redis/client@1.5.16)
+      '@redis/client': 1.5.16
+      '@redis/graph': 1.1.1(@redis/client@1.5.16)
+      '@redis/json': 1.0.6(@redis/client@1.5.16)
+      '@redis/search': 1.1.6(@redis/client@1.5.16)
+      '@redis/time-series': 1.0.5(@redis/client@1.5.16)
+    dev: false
 
   /reflect-metadata@0.1.14:
     resolution: {integrity: sha1-JM9yH+YGdxRrt37rDh+d7OPWWFk=}
@@ -5123,7 +5213,7 @@ packages:
   /typedarray@0.0.6:
     resolution: {integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=}
 
-  /typeorm@0.3.20(mysql2@3.9.7)(ts-node@10.9.2):
+  /typeorm@0.3.20(mysql2@3.9.7)(redis@4.6.14)(ts-node@10.9.2):
     resolution: {integrity: sha1-S2HXN8b+1On2MAb4jVil5UgWt6s=}
     engines: {node: '>=16.13.0'}
     hasBin: true
@@ -5192,6 +5282,7 @@ packages:
       glob: 10.3.10
       mkdirp: 2.1.6
       mysql2: 3.9.7
+      redis: 4.6.14
       reflect-metadata: 0.2.2
       sha.js: 2.4.11
       ts-node: 10.9.2(@types/node@20.12.12)(typescript@5.4.5)
@@ -5273,7 +5364,7 @@ packages:
     dev: true
 
   /validator@13.12.0:
-    resolution: {integrity: sha1-fXjna6hVBNo/7k/Rkis4WRTUs18=, tarball: https://artifactory.sf-express.com:443/artifactory/api/npm/npm/validator/-/validator-13.12.0.tgz}
+    resolution: {integrity: sha1-fXjna6hVBNo/7k/Rkis4WRTUs18=}
     engines: {node: '>= 0.10'}
 
   /vary@1.1.2:
@@ -5459,6 +5550,10 @@ packages:
   /yallist@3.1.1:
     resolution: {integrity: sha1-27fa+b/YusmrRev2ArjLrQ1dCP0=}
     dev: true
+
+  /yallist@4.0.0:
+    resolution: {integrity: sha1-m7knkNnA7/7GO+c1GeEaNQGaOnI=}
+    dev: false
 
   /yargs-parser@20.2.9:
     resolution: {integrity: sha1-LrfcOwKJcY/ClfNidThFxBoMlO4=}
