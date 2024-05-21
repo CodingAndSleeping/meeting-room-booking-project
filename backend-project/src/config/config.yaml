@@ -1,0 +1,29 @@
+# mysql 配置
+mysql:
+  server:
+    host: localhost
+    port: 3306
+    username: root
+    password: root
+    database: meeting_room_booking_system
+
+# redis 配置
+redis:
+  server:
+    host: localhost
+    port: 6379
+    db: 1
+
+# nodemailer email 配置
+nodemailer:
+  server:
+    host: smtp.qq.com
+    port: 587
+    auth:
+      user: 1162300237@qq.com
+      pass: 你的授权码
+
+# nest server 配置
+nest:
+  server:
+    port: 9527

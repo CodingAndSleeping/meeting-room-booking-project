@@ -8,6 +8,9 @@ dependencies:
   '@nestjs/common':
     specifier: ^10.0.0
     version: 10.3.8(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.1.14)(rxjs@7.8.1)
+  '@nestjs/config':
+    specifier: ^3.2.2
+    version: 3.2.2(@nestjs/common@10.3.8)(rxjs@7.8.1)
   '@nestjs/core':
     specifier: ^10.0.0
     version: 10.3.8(@nestjs/common@10.3.8)(@nestjs/platform-express@10.3.8)(reflect-metadata@0.1.14)(rxjs@7.8.1)
@@ -26,6 +29,9 @@ dependencies:
   class-validator:
     specifier: ^0.14.1
     version: 0.14.1
+  js-yaml:
+    specifier: ^4.1.0
+    version: 4.1.0
   mysql2:
     specifier: ^3.9.7
     version: 3.9.7
@@ -61,6 +67,9 @@ devDependencies:
   '@types/jest':
     specifier: ^29.5.2
     version: 29.5.12
+  '@types/js-yaml':
+    specifier: ^4.0.9
+    version: 4.0.9
   '@types/node':
     specifier: ^20.3.1
     version: 20.12.12
@@ -924,6 +933,20 @@ packages:
       tslib: 2.6.2
       uid: 2.0.2
 
+  /@nestjs/config@3.2.2(@nestjs/common@10.3.8)(rxjs@7.8.1):
+    resolution: {integrity: sha1-fole2yh4Vk4Kf8QRYUkCsDMMqUA=}
+    peerDependencies:
+      '@nestjs/common': ^8.0.0 || ^9.0.0 || ^10.0.0
+      rxjs: ^7.1.0
+    dependencies:
+      '@nestjs/common': 10.3.8(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.1.14)(rxjs@7.8.1)
+      dotenv: 16.4.5
+      dotenv-expand: 10.0.0
+      lodash: 4.17.21
+      rxjs: 7.8.1
+      uuid: 9.0.1
+    dev: false
+
   /@nestjs/core@10.3.8(@nestjs/common@10.3.8)(@nestjs/platform-express@10.3.8)(reflect-metadata@0.1.14)(rxjs@7.8.1):
     resolution: {integrity: sha1-CDH8RLUc/nNs9f+s0X1HncgG7ds=}
     requiresBuild: true
@@ -1295,6 +1318,10 @@ packages:
       pretty-format: 29.7.0
     dev: true
 
+  /@types/js-yaml@4.0.9:
+    resolution: {integrity: sha1-zYI4LE+QL+2WkaLteexoxYmK9MI=}
+    dev: true
+
   /@types/json-schema@7.0.15:
     resolution: {integrity: sha1-WWoXRyM2lNUPatinhp/Lb1bPWEE=}
     dev: true
@@ -1313,7 +1340,7 @@ packages:
       undici-types: 5.26.5
 
   /@types/nodemailer@6.4.15:
-    resolution: {integrity: sha1-SUvmleEcQ49/Xfc4+0q3QDEqbtI=, tarball: https://artifactory.sf-express.com:443/artifactory/api/npm/npm/@types/nodemailer/-/nodemailer-6.4.15.tgz}
+    resolution: {integrity: sha1-SUvmleEcQ49/Xfc4+0q3QDEqbtI=}
     dependencies:
       '@types/node': 20.12.12
     dev: true
@@ -1761,14 +1788,13 @@ packages:
     resolution: {integrity: sha1-Jp/HrVuOQstjyJbVZmAXJhwUQIk=}
 
   /argparse@1.0.10:
-    resolution: {integrity: sha1-vNZ5HqWuCXJeF+WtmIE0zUCz2RE=}
+    resolution: {integrity: sha1-vNZ5HqWuCXJeF+WtmIE0zUCz2RE=, tarball: https://artifactory.sf-express.com:443/artifactory/api/npm/npm/argparse/-/argparse-1.0.10.tgz}
     dependencies:
       sprintf-js: 1.0.3
     dev: true
 
   /argparse@2.0.1:
-    resolution: {integrity: sha1-JG9Q88p4oyQPbJl+ipvR6sSeSzg=}
-    dev: true
+    resolution: {integrity: sha1-JG9Q88p4oyQPbJl+ipvR6sSeSzg=, tarball: https://artifactory.sf-express.com:443/artifactory/api/npm/npm/argparse/-/argparse-2.0.1.tgz}
 
   /array-flatten@1.1.1:
     resolution: {integrity: sha1-ml9pkFGx5wczKPKgCJaLZOopVdI=}
@@ -2403,6 +2429,11 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
+
+  /dotenv-expand@10.0.0:
+    resolution: {integrity: sha1-EmBdAPsK9tClkuZVhYV4QDLk7zc=}
+    engines: {node: '>=12'}
+    dev: false
 
   /dotenv@16.4.5:
     resolution: {integrity: sha1-zdOztgTLMn4oa0di4TUC9xfLCZ8=}
@@ -3782,7 +3813,7 @@ packages:
     dev: true
 
   /js-yaml@3.14.1:
-    resolution: {integrity: sha1-2ugS/bOCX6MGYJqHFzg8UMNqBTc=}
+    resolution: {integrity: sha1-2ugS/bOCX6MGYJqHFzg8UMNqBTc=, tarball: https://artifactory.sf-express.com:443/artifactory/api/npm/npm/js-yaml/-/js-yaml-3.14.1.tgz}
     hasBin: true
     dependencies:
       argparse: 1.0.10
@@ -3790,11 +3821,10 @@ packages:
     dev: true
 
   /js-yaml@4.1.0:
-    resolution: {integrity: sha1-wftl+PUBeQHN0slRhkuhhFihBgI=}
+    resolution: {integrity: sha1-wftl+PUBeQHN0slRhkuhhFihBgI=, tarball: https://artifactory.sf-express.com:443/artifactory/api/npm/npm/js-yaml/-/js-yaml-4.1.0.tgz}
     hasBin: true
     dependencies:
       argparse: 2.0.1
-    dev: true
 
   /jsesc@2.5.2:
     resolution: {integrity: sha1-gFZNLkg9rPbo7yCWUKZ98/DCg6Q=}
@@ -3904,7 +3934,6 @@ packages:
 
   /lodash@4.17.21:
     resolution: {integrity: sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=}
-    dev: true
 
   /log-symbols@4.1.0:
     resolution: {integrity: sha1-P727lbRoOsn8eFER55LlWNSr1QM=}
