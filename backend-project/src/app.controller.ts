@@ -11,7 +11,6 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    console.log(this.configService.get('mysql.server.host'));
     return this.appService.getHello();
   }
 }
