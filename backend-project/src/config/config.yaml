@@ -27,3 +27,8 @@ nodemailer:
 nest:
   server:
     port: 9527
+
+jwt:
+  secret: tttttttt
+  access_token_expires_time: 30m # 30 min
+  refresh_token_expires_time: 7d # 7 day

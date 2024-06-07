@@ -106,9 +106,9 @@ export class UserService {
       throw new HttpException('密码错误', HttpStatus.BAD_REQUEST);
     }
 
-    const vo = new LoginUserVo();
+    const loginUserVo = new LoginUserVo();
 
-    vo.userInfo = {
+    loginUserVo.userInfo = {
       id: user.id,
       username: user.username,
       nickName: user.nickName,
@@ -129,7 +129,33 @@ export class UserService {
       }, []),
     };
 
-    return vo;
+    return loginUserVo;
+  }
+
+  async findUserById(userId: number, isAdmin: boolean) {
+    const user = await this.userRepository.findOne({
+      where: {
+        id: userId,
+        isAdmin,
+      },
+
+      relations: ['roles', 'roles.permissions'],
+    });
+
+    return {
+      id: user.id,
+      username: user.username,
+      isAdmin: user.isAdmin,
+      roles: user.roles.map((item) => item.name),
+      permissions: user.roles.reduce((arr, item) => {
+        item.permissions.forEach((permission) => {
+          if (arr.indexOf(permission) === -1) {
+            arr.push(permission);
+          }
+        });
+        return arr;
+      }, []),
+    };
   }
 
   // 初始化数据
@@ -141,7 +167,6 @@ export class UserService {
     user1.isAdmin = true;
     user1.nickName = '张三';
     user1.phoneNumber = '13233323333';
-
     const user2 = new User();
     user2.username = 'lisi';
     user2.password = md5('222222');
