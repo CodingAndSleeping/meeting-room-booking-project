@@ -4,7 +4,6 @@ import {
   createParamDecorator,
 } from '@nestjs/common';
 import { Request } from 'express';
-import { JwtUserData } from 'src/guard/login.guard';
 
 export const RequireLogin = () => SetMetadata('require-login', true);
 

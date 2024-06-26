@@ -6,7 +6,6 @@ import { ConfigService } from '@nestjs/config';
 @Global()
 @Module({
   providers: [
-    RedisService,
     {
       provide: 'REDIS_CLIENT',
       async useFactory(configService: ConfigService) {
@@ -22,6 +21,7 @@ import { ConfigService } from '@nestjs/config';
       },
       inject: [ConfigService], // 注入 ConfigService
     },
+    RedisService,
   ],
   exports: [RedisService],
 })
