@@ -9,6 +9,7 @@ import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { Observable } from 'rxjs';
+
 import { Permission } from 'src/user/entities/permission.entity';
 
 export interface JwtUserData {
@@ -35,6 +36,8 @@ export class LoginGuard implements CanActivate {
       context.getClass(),
       context.getHandler(),
     ]);
+
+    console.log(requireLogin);
 
     if (!requireLogin) return true;
 

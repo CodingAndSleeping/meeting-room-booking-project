@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  DefaultValuePipe,
   Get,
   Inject,
   Post,
@@ -20,6 +21,7 @@ import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
 import { RedisService } from 'src/redis/redis.service';
 import { EmailService } from 'src/email/email.service';
 import { UpdateUserDto } from './dto/update-user-dto';
+import { generateParseIntPipe } from './utils/generateParseIntPipe';
 
 @Controller('user')
 export class UserController {
@@ -191,6 +193,40 @@ export class UserController {
       html: `<p>你的验证码是 ${code}</p>`,
     });
     return '发送成功';
+  }
+
+  @Get('freeze')
+  async freeze(@Query('id') userId: number) {
+    await this.userService.freezeUserById(userId);
+
+    return '冻结成功';
+  }
+
+  @Get('list')
+  async list(
+    @Query(
+      'pageNo',
+      new DefaultValuePipe(1),
+      generateParseIntPipe('pageNo应该传数字！'),
+    )
+    pageNo: number,
+    @Query(
+      'pageSize',
+      new DefaultValuePipe(5),
+      generateParseIntPipe('pageSize应该传数字！'),
+    )
+    pageSize: number,
+    @Query('username') username: string,
+    @Query('nickName') nickName: string,
+    @Query('email') email: string,
+  ) {
+    return await this.userService.findUserByPage(
+      username,
+      nickName,
+      email,
+      pageNo,
+      pageSize,
+    );
   }
 
   @Get('init-data')
