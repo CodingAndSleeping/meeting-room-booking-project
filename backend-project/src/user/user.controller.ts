@@ -3,6 +3,7 @@ import {
   Controller,
   DefaultValuePipe,
   Get,
+  HttpStatus,
   Inject,
   Post,
   Query,
@@ -22,7 +23,8 @@ import { RedisService } from 'src/redis/redis.service';
 import { EmailService } from 'src/email/email.service';
 import { UpdateUserDto } from './dto/update-user-dto';
 import { generateParseIntPipe } from './utils/generateParseIntPipe';
-
+import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+@ApiTags('用户管理模块')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -44,6 +46,18 @@ export class UserController {
     return await this.userService.register(registerUser);
   }
 
+  @ApiQuery({
+    name: 'email',
+    type: String,
+    description: '邮箱地址',
+    required: true,
+    example: 'xxx@xx.com',
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: '发送成功',
+    type: String,
+  })
   @Get('register-captcha')
   async getCaptcha(@Query('email') email: string) {
     return await this.userService.getCaptcha(email);
